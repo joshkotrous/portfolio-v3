@@ -42,6 +42,9 @@ export default {
       amber: colors.amber,
       orange: colors.orange,
       emerald: colors.emerald,
+      yellow: colors.yellow,
+      green: colors.green,
+      lime: colors.lime,
 
       // ...
     },
