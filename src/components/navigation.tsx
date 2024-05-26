@@ -19,7 +19,7 @@ const Navigation: React.FC<NavigationProps> = ({
   const [selectedWidth, setSelectedWidth] = useState(0);
   const [selectedLeft, setSelectedLeft] = useState(0);
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [observeIntersection, setObserveIntersection] = useState(true);
 
   const menuRef = useRef<HTMLDivElement>(null);
   const menuRef2 = useRef<HTMLDivElement>(null);
@@ -53,11 +53,63 @@ const Navigation: React.FC<NavigationProps> = ({
     );
   };
 
-  const handleScroll = (event: any) => {
-    const scrollPosition = event.target.scrollLeft;
-    setScrollPosition(scrollPosition);
-    // You can perform any actions based on the scroll position here
+  const handleClick = async (item: any) => {
+    setObserveIntersection(false);
+    setSelected(item.name);
+    scrollToSection(item.name.toLowerCase());
+    setTimeout(() => {
+      setObserveIntersection(true);
+    }, 2000);
   };
+
+  useEffect(() => {
+    const homeElement = document.querySelector("#home");
+    const postsElement = document.querySelector("#posts");
+    const projectsElement = document.querySelector("#projects");
+    const componentsElement = document.querySelector("#components");
+
+    if (homeElement) {
+      const observerCallback = (entries: any) => {
+        entries.forEach((entry: any) => {
+          if (entry.isIntersecting) {
+            console.log(entry.target.id);
+            setSelected(
+              entry.target.id.charAt(0).toUpperCase() + entry.target.id.slice(1)
+            );
+            console.log("Element is in view");
+            // Do something when the element is in view
+          } else {
+            console.log("Element is out of view");
+            // Do something when the element is out of view
+          }
+        });
+      };
+
+      const observerOptions = {
+        root: null, // Use the viewport as the root
+        threshold: 0.75, // Trigger the callback when 50% of the target is visible
+      };
+
+      const observer = new IntersectionObserver(
+        observerCallback,
+        observerOptions
+      );
+
+      if (observeIntersection) {
+        observer.observe(homeElement);
+        observer.observe(postsElement!);
+        observer.observe(projectsElement!);
+        observer.observe(componentsElement!);
+      }
+
+      return () => {
+        observer.unobserve(homeElement);
+        observer.unobserve(postsElement!);
+        observer.unobserve(projectsElement!);
+        observer.unobserve(componentsElement!);
+      };
+    }
+  }, [observeIntersection]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,6 +125,7 @@ const Navigation: React.FC<NavigationProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, [selected, isAnimationComplete]);
+
   useEffect(() => {
     // Set the scroll position to (x, y) coordinates (e.g., (0, 100))
     if (menuRef2.current) {
@@ -84,15 +137,7 @@ const Navigation: React.FC<NavigationProps> = ({
     <div
       className={`fixed w-screen flex justify-center z-50 top-5 transition-all `}
     >
-      <motion.div
-        // initial={{
-        //   scaleY: 0,
-        //   transformOrigin: "center",
-        // }}
-        // animate={{ scaleY: 1 }}
-        // transition={{ duration: 0.5 }}
-        className="w-full flex justify-center "
-      >
+      <motion.div className="w-full flex justify-center ">
         <motion.div
           initial={{
             width: 0,
@@ -106,23 +151,12 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           <div className="relative overflow-hidden w-full">
             <motion.div
-              //   style={{
-              //     maskPosition: "center",
-              //     maskRepeat: "no-repeat",
-              //     maskComposite: "intersect",
-              //   }}
               initial={{
                 width: 0,
               }}
               animate={{ width: "100%" }}
               transition={{ duration: 0.25 }}
               ref={menuRef2}
-              onScroll={handleScroll}
-              //   className={`relative flex items-center overflow-auto justify-evenly ${
-              //     scrollPosition > 0
-              //       ? "[mask:linear-gradient(to_right,transparent,#000_1px),linear-gradient(to_left,transparent,#000_1px)]"
-              //       : "[mask:linear-gradient(to_left,transparent,#000_1px)]"
-              //   }`}
               className={`relative flex items-center overflow-auto justify-evenly `}
             >
               {menuItems.map((item) => (
@@ -131,8 +165,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   id={item.name}
                   className="relative cursor-pointer px-[13px] py-2 z-20 select-none"
                   onClick={() => {
-                    setSelected(item.name);
-                    scrollToSection(item.name.toLowerCase());
+                    handleClick(item);
                   }}
                 >
                   {item.name}

@@ -8,7 +8,6 @@ import Gradients from "./components/gradients";
 import "./App.css";
 export default function Layout() {
   const [darkMode, setDarkMode] = useState<boolean>(true);
-  const [homeRef, setHomeRef] = useState();
 
   useEffect(() => {
     const isDark = localStorage.getItem("darkMode");
@@ -37,7 +36,7 @@ export default function Layout() {
         <meta name="theme-color" content={darkMode ? "bg-gray-600" : "white"} />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-        <title>head test</title>
+        <title>Josh Kotrous</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <body
