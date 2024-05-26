@@ -36,6 +36,12 @@ export default {
         900: "rgba(25,25,25)",
       },
       "light-gray": colors.gray,
+      blue: colors.blue,
+      sky: colors.sky,
+      cyan: colors.cyan,
+      amber: colors.amber,
+      orange: colors.orange,
+      emerald: colors.emerald,
 
       // ...
     },

@@ -5,6 +5,7 @@ import Post from "@/components/post";
 import { MagicCardGradient } from "@/components/magicui/magic-card-gradient";
 import HeroBanner from "@/components/hero-banner";
 import NavigationDemo from "@/components/navigation-demo";
+import SkillTags from "@/components/skill-tags";
 export default function Index() {
   return (
     <>
@@ -30,9 +31,10 @@ export default function Index() {
               A fully responsive and reusable nav bar with support for dark
               mode.
             </p>
+            <SkillTags />
           </div>
 
-          <NavigationDemo classNames="absolute" />
+          <NavigationDemo />
         </div>
       </Section>
     </>

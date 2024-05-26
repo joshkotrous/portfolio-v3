@@ -6,8 +6,8 @@ interface BorderedContainerProps {
 
 const BorderedContainer: React.FC<BorderedContainerProps> = ({ children }) => {
   return (
-    <div className="relative w-full h-fit max-h-[90%] flex flex-col gap-4 border-black/20 dark:border-white/20 border-[1px] p-4 backdrop-blur-[50px]">
-      <div className="overflow-auto h-full  w-full flex flex-col gap-4">
+    <div className="relative w-full h-fit max-h-[90%] flex flex-col gap-4 border-black/20 dark:border-white/20 border-[1px] backdrop-blur-[50px]">
+      <div className="overflow-auto h-full  w-full flex flex-col gap-4 p-4">
         {children}
       </div>
 
