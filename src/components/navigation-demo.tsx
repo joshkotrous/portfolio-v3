@@ -10,25 +10,21 @@ interface NavigationProps {
   classNames?: string;
 }
 
-const Navigation: React.FC<NavigationProps> = ({
-  darkMode,
-  setDarkMode,
-  classNames,
-}) => {
-  const [selected, setSelected] = useState("Home");
+const NavigationDemo: React.FC<NavigationProps> = ({ classNames }) => {
+  const [selected, setSelected] = useState("Code");
   const [selectedWidth, setSelectedWidth] = useState(0);
   const [selectedLeft, setSelectedLeft] = useState(0);
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [darkMode, setDarkMode] = useState(true);
 
   const menuRef = useRef<HTMLDivElement>(null);
   const menuRef2 = useRef<HTMLDivElement>(null);
 
   const menuItems = [
-    { name: "Home", id: 1 },
-    { name: "Posts", id: 2 },
-    { name: "Projects", id: 3 },
-    { name: "Components", id: 4 },
+    { name: "Code", id: 1 },
+    { name: "Contact", id: 2 },
+    { name: "About", id: 3 },
   ];
 
   const scrollToSection = (id: string) => {
@@ -79,10 +75,9 @@ const Navigation: React.FC<NavigationProps> = ({
       menuRef2.current.scrollLeft = -100; // Horizontal scroll position
     }
   }, []);
-
   return (
     <div
-      className={`fixed w-screen flex justify-center z-50 top-5 transition-all `}
+      className={`w-full flex justify-center max-h-fit transition-all font-normal`}
     >
       <motion.div
         // initial={{
@@ -91,7 +86,7 @@ const Navigation: React.FC<NavigationProps> = ({
         // }}
         // animate={{ scaleY: 1 }}
         // transition={{ duration: 0.5 }}
-        className="w-full flex justify-center "
+        className="w-full flex justify-center max-h-fit"
       >
         <motion.div
           initial={{
@@ -100,11 +95,11 @@ const Navigation: React.FC<NavigationProps> = ({
           }}
           animate={{ width: "75%", opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="w-fit backdrop-blur-2xl dark:bg-white/5 bg-gray-900/5 py-1 px-1 rounded-2xl dark:text-white flex justify-center items-center max-w-fit "
+          className="w-fit backdrop-blur-2xl dark:bg-white/5 h-fit bg-gray-900/5 py-1 px-1 rounded-2xl dark:text-white flex justify-center items-center max-w-fit "
           ref={menuRef}
           onAnimationComplete={() => setIsAnimationComplete(true)}
         >
-          <div className="relative overflow-hidden w-full">
+          <div className="relative overflow-hidden w-full h-fit">
             <motion.div
               //   style={{
               //     maskPosition: "center",
@@ -123,7 +118,7 @@ const Navigation: React.FC<NavigationProps> = ({
               //       ? "[mask:linear-gradient(to_right,transparent,#000_1px),linear-gradient(to_left,transparent,#000_1px)]"
               //       : "[mask:linear-gradient(to_left,transparent,#000_1px)]"
               //   }`}
-              className={`relative flex items-center overflow-auto justify-evenly `}
+              className={`relative flex items-center overflow-auto justify-evenly h-fit`}
             >
               {menuItems.map((item) => (
                 <div
@@ -132,7 +127,6 @@ const Navigation: React.FC<NavigationProps> = ({
                   className="relative cursor-pointer px-[13px] py-2 z-20 select-none"
                   onClick={() => {
                     setSelected(item.name);
-                    scrollToSection(item.name.toLowerCase());
                   }}
                 >
                   {item.name}
@@ -185,7 +179,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   width: `${selectedWidth}px`,
                   left: `${selectedLeft}px`,
                 }}
-                layoutId="underline"
+                layoutId={String(Math.random())}
                 transition={{
                   type: "spring",
                   stiffness: 500,
@@ -200,4 +194,4 @@ const Navigation: React.FC<NavigationProps> = ({
   );
 };
 
-export default Navigation;
+export default NavigationDemo;
