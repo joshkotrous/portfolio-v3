@@ -2,12 +2,20 @@ import React from "react";
 
 interface BorderedContainerProps {
   children?: React.ReactNode;
+  className?: string;
+  secondaryClassName?: string;
 }
 
-const BorderedContainer: React.FC<BorderedContainerProps> = ({ children }) => {
+const BorderedContainer: React.FC<BorderedContainerProps> = ({
+  children,
+  className,
+  secondaryClassName,
+}) => {
   return (
-    <div className="relative w-full h-fit max-h-[90%] flex flex-col gap-4 border-black/20 dark:border-white/20 border-[1px] backdrop-blur-[50px]">
-      <div className="overflow-auto h-full  w-full flex flex-col gap-4 p-4">
+    <div
+      className={`relative w-full h-fit max-h-[90%] flex flex-col gap-4 border-black/20 dark:border-white/20 border-[1px] backdrop-blur-[50px] ${className}`}
+    >
+      <div className={`overflow-auto gap-4 p-4 ${secondaryClassName}`}>
         {children}
       </div>
 

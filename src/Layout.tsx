@@ -26,6 +26,7 @@ export default function Layout() {
     } else {
       localStorage.setItem("darkMode", "false");
     }
+    console.log(darkMode);
   }, [darkMode]);
 
   return (
@@ -33,20 +34,24 @@ export default function Layout() {
       <Head>
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/react.svg" />
-        <meta name="theme-color" content={darkMode ? "bg-gray-600" : "white"} />
+        {/* <meta name="theme-color" content={darkMode ? "bg-gray-600" : "white"} /> */}
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
         <title>Josh Kotrous</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <body
-          className={`${darkMode ? "bg-gray-600" : "bg-white"} transition-all`}
+          className={`${
+            darkMode ? "dark" : "light "
+          } dark:bg-gray-900    text-black dark:text-white transition-all`}
         />
       </Head>
       <main
-        className={`${
-          darkMode && "dark bg-transparent text-white"
-        } transition-all relative overflow-auto overflow-x-hidden antialiased  z-[0]`}
+        id="main"
+        // className={`${
+        //   darkMode && "dark bg-transparent text-white"
+        // } transition-all relative overflow-auto overflow-x-hidden antialiased  z-[0]`}
+        className={`bg-transparent transition-all relative overflow-auto overflow-x-hidden antialiased  z-[0]  `}
       >
         <h1 className="hidden">Josh Kotrous</h1>
         <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />

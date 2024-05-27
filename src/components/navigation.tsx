@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { IoIosSunny } from "react-icons/io";
 import { GoMoon } from "react-icons/go";
 import "../App.css";
-
+import { useLocation } from "react-router-dom";
 interface NavigationProps {
   darkMode?: boolean;
   setDarkMode?: any;
@@ -20,7 +20,8 @@ const Navigation: React.FC<NavigationProps> = ({
   const [selectedLeft, setSelectedLeft] = useState(0);
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const [observeIntersection, setObserveIntersection] = useState(true);
-
+  const location = useLocation();
+  const [showNav, setShowNav] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuRef2 = useRef<HTMLDivElement>(null);
 
@@ -133,9 +134,22 @@ const Navigation: React.FC<NavigationProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    const getCurrentUrl = () => {
+      const currentUrl = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
+      if (currentUrl.includes("posts")) {
+        setShowNav(false);
+      }
+    };
+
+    getCurrentUrl();
+  }, [location]);
+
   return (
     <div
-      className={`fixed w-screen flex justify-center z-50 top-5 transition-all `}
+      className={`fixed w-screen flex justify-center z-50 top-5 transition-all ${
+        !showNav && "hidden"
+      }`}
     >
       <motion.div className="w-full flex justify-center ">
         <motion.div
