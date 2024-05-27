@@ -10,11 +10,20 @@ import { FormatDate } from "@/hooks/format-date";
 import { GetPosts, PostData } from "@/hooks/get-posts";
 import { Link } from "react-router-dom";
 import { Head } from "vite-react-ssg";
-import Navigation from "@/components/navigation";
+import Project from "@/components/project";
+
 export default function Index() {
   const [darkMode, setDarkMode] = useState<boolean>(true);
-
   const [posts, setPosts] = useState<Array<PostData>>();
+  const projects = [
+    {
+      title: "Portfolio v1",
+      description: "My first developer portfolio.",
+      url: "https://joshkotrous.github.io/portfolio-v1",
+      repoUrl: "https://github.com/joshkotrous/portfolio-v1",
+      skills: ["React", "JavaScript", "Framer Motion"],
+    },
+  ];
   const getPosts = async () => {
     const postData = await GetPosts();
     setPosts(postData);
@@ -35,27 +44,11 @@ export default function Index() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const main = document.getElementById("main");
-  //   if (darkMode) {
-  //     localStorage.setItem("darkMode", "true");
-  //     main?.classList.add("dark");
-  //     main?.classList.add("bg-transparent");
-  //     main?.classList.add("text-white");
-  //   } else {
-  //     main?.classList.remove("dark");
-  //     main?.classList.remove("text-white");
-  //     localStorage.setItem("darkMode", "false");
-  //   }
-  // }, [darkMode]);
-
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/react.svg" />
-        <meta name="theme-color" content={darkMode ? "bg-gray-600" : "white"} />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
         <title>Josh Kotrous</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -91,7 +84,18 @@ export default function Index() {
         </BorderedContainer>
       </Section>
       <Section title="Projects">
-        <MagicCardGradient />
+        <MagicCardGradient>
+          {projects &&
+            projects.map((item: any) => (
+              <Project
+                title={item.title}
+                description={item.description}
+                skills={item.skills}
+                url={item.url}
+                repoUrl={item.repoUrl}
+              ></Project>
+            ))}
+        </MagicCardGradient>
       </Section>
       <Section title="Components">
         <div className="w-full relative flex flex-col-reverse gap-4 md:flex-row items-center">
@@ -101,7 +105,9 @@ export default function Index() {
               A fully responsive and reusable nav bar with support for dark
               mode.
             </p>
-            <SkillTags />
+            <SkillTags
+              skills={["React", "TypeScript", "Tailwind CSS", "Framer Motion"]}
+            />
           </div>
 
           <NavigationDemo />

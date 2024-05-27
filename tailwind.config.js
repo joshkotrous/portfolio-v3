@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import { GeistSans } from "geist/font/sans";
 
 const colors = require("tailwindcss/colors");
 
@@ -7,7 +6,7 @@ export default {
   content: ["./src/**/*.{html,js,ts,tsx}"],
   theme: {
     extend: {
-      fontFamily: { mono: ["var(--font-geist-mono)"] },
+      fontFamily: { "geist-mono": ["GeistMonoVF"] },
       animation: {
         "gradient-shift": "gradientShift 10s ease infinite",
       },

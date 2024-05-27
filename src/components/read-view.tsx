@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 // @ts-ignore
 import { Helmet } from "react-helmet";
 import { Head } from "vite-react-ssg";
+// @ts-ignore
+import { HashLink } from "react-router-hash-link";
+
 interface ReadViewProps {
   filePath: string;
   date?: string;
@@ -71,6 +74,8 @@ const ReadView: React.FC<ReadViewProps> = ({
         <meta name="author" content="Josh Kotrous" />
       </Helmet> */}
       <Head>
+        <title>{`Josh Kotrous | ${title}`}</title>
+
         <meta name="title" property="og:title" content={title} />
       </Head>
       <div className="w-[90vw] h-screen p-2 pt-10">
@@ -79,12 +84,14 @@ const ReadView: React.FC<ReadViewProps> = ({
           secondaryClassName="gap-0"
         >
           <div className="w-fit h-fit">
-            <IoIosArrowRoundBack
-              className="text-5xl cursor-pointer"
-              onClick={() => {
-                navigate("/");
-              }}
-            />
+            <HashLink to="/#posts">
+              <IoIosArrowRoundBack
+                className="text-5xl cursor-pointer"
+                // onClick={() => {
+                //   navigate("/#posts");
+                // }}
+              />
+            </HashLink>
           </div>
           <ReactMarkdown
             components={{
@@ -100,16 +107,16 @@ const ReadView: React.FC<ReadViewProps> = ({
               p: ({ children }) => <p className="inter-regular">{children}</p>,
               table: ({ children }) => (
                 <div className="text-center overflow-auto">
-                  <table className="border-collapse m-auto border-white border-[1px]">
+                  <table className="border-collapse m-auto  border-[1px]">
                     {children}
                   </table>
                 </div>
               ),
               th: ({ children }) => (
-                <th className="border-white border-[1px] p-3">{children}</th>
+                <th className=" border-[1px] p-3">{children}</th>
               ),
               td: ({ children }) => (
-                <td className="border-white border-[1px] p-3">{children}</td>
+                <td className=" border-[1px] p-3">{children}</td>
               ),
               ol: ({ children }) => (
                 <ol className="list-decimal">{children}</ol>

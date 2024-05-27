@@ -34,7 +34,7 @@ export default function Layout() {
       <Head>
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/react.svg" />
-        {/* <meta name="theme-color" content={darkMode ? "bg-gray-600" : "white"} /> */}
+        <meta name="theme-color" content={darkMode ? "bg-gray-600" : "white"} />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
         <title>Josh Kotrous</title>

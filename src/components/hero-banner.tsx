@@ -12,7 +12,7 @@ const HeroBanner = () => {
     >
       <div className="flex flex-col items-center justify-center">
         <WordRotate
-          className="text-4xl font-bold text-black dark:text-white"
+          className="text-4xl font-bold"
           words={[
             "Web Development.",
             "UI/UX Design.",

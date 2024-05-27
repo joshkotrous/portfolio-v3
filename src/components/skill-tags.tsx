@@ -1,10 +1,16 @@
 import React from "react";
+
 interface SkillTagsProps {
   className?: string;
   skillClassName?: string;
+  skills?: string[];
 }
 
-const SkillTags: React.FC<SkillTagsProps> = ({ className, skillClassName }) => {
+const SkillTags: React.FC<SkillTagsProps> = ({
+  className,
+  skillClassName,
+  skills = ["React", "Python"],
+}) => {
   const skillSettings = [
     {
       name: "React",
@@ -41,13 +47,35 @@ const SkillTags: React.FC<SkillTagsProps> = ({ className, skillClassName }) => {
       text: "text-lime-300",
       border: "border-lime-300",
     },
+    {
+      name: "Framer Motion",
+      background: "bg-light-gray-600",
+      backgroundDark: "dark:bg-light-gray-500/50",
+      text: "text-light-gray-300",
+      border: "border-light-gray-300",
+    },
   ];
+
+  const getSkillConfig = (skill: string) => {
+    const config = skillSettings.find((item: any) => {
+      return skill === item.name;
+    });
+
+    if (config) {
+      return {
+        background: config.background,
+        backgroundDark: config.backgroundDark,
+        text: config.text,
+        border: config.border,
+      };
+    }
+  };
 
   return (
     <div
-      className={`mt-2 flex w-fit flex-wrap gap-2 text-xs max-h-[4rem] ${className}`}
+      className={`mt-2 flex w-full flex-wrap gap-2 text-xs max-h-[4rem] font-geist-mono ${className}`}
     >
-      <p
+      {/* <p
         className={`font-normal dark:bg-cyan-700/50 bg-cyan-600 text-cyan-300 border-cyan-300 border-[1px] w-fit rounded-lg p-2 py-1 transition-all ${skillClassName}`}
       >
         React
@@ -71,7 +99,18 @@ const SkillTags: React.FC<SkillTagsProps> = ({ className, skillClassName }) => {
         className={`font-normal dark:bg-lime-500/50 bg-green-600 text-lime-300 border-lime-300 border-[1px] w-fit rounded-lg p-2 py-1 transition-all ${skillClassName}`}
       >
         Python
-      </p>
+      </p> */}
+      {skills &&
+        skills.map((item: string) => {
+          const config = getSkillConfig(item);
+          return (
+            <p
+              className={`font-normal dark:${config?.backgroundDark} ${config?.background} ${config?.text} ${config?.border} border-[1px] w-fit rounded-lg p-2 py-1 transition-all ${skillClassName}`}
+            >
+              {item}
+            </p>
+          );
+        })}
     </div>
   );
 };

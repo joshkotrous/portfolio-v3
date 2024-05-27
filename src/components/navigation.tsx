@@ -110,7 +110,7 @@ const Navigation: React.FC<NavigationProps> = ({
         observer.unobserve(componentsElement!);
       };
     }
-  }, [observeIntersection]);
+  }, [observeIntersection, location]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -137,8 +137,10 @@ const Navigation: React.FC<NavigationProps> = ({
   useEffect(() => {
     const getCurrentUrl = () => {
       const currentUrl = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
-      if (currentUrl.includes("posts")) {
+      if (currentUrl.includes("posts") && !currentUrl.includes("#posts")) {
         setShowNav(false);
+      } else {
+        setShowNav(true);
       }
     };
 
@@ -146,104 +148,106 @@ const Navigation: React.FC<NavigationProps> = ({
   }, [location]);
 
   return (
-    <div
-      className={`fixed w-screen flex justify-center z-50 top-5 transition-all ${
-        !showNav && "hidden"
-      }`}
-    >
-      <motion.div className="w-full flex justify-center ">
-        <motion.div
-          initial={{
-            width: 0,
-            opacity: 0,
-          }}
-          animate={{ width: "75%", opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="w-fit backdrop-blur-2xl dark:bg-white/5 bg-gray-900/5 py-1 px-1 rounded-2xl dark:text-white flex justify-center items-center max-w-fit "
-          ref={menuRef}
-          onAnimationComplete={() => setIsAnimationComplete(true)}
+    <>
+      {showNav && (
+        <div
+          className={`fixed w-screen flex justify-center z-50 top-5 transition-all`}
         >
-          <div className="relative overflow-hidden w-full">
+          <motion.div className="w-full flex justify-center ">
             <motion.div
               initial={{
                 width: 0,
+                opacity: 0,
               }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 0.25 }}
-              ref={menuRef2}
-              className={`relative flex items-center overflow-auto justify-evenly `}
+              animate={{ width: "75%", opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="w-fit backdrop-blur-2xl dark:bg-white/5 bg-gray-900/5 py-1 px-1 rounded-2xl dark:text-white flex justify-center items-center max-w-fit "
+              ref={menuRef}
+              onAnimationComplete={() => setIsAnimationComplete(true)}
             >
-              {menuItems.map((item) => (
-                <div
-                  key={item.id}
-                  id={item.name}
-                  className="relative cursor-pointer px-[13px] py-2 z-20 select-none"
-                  onClick={() => {
-                    handleClick(item);
+              <div className="relative overflow-hidden w-full">
+                <motion.div
+                  initial={{
+                    width: 0,
                   }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 0.25 }}
+                  ref={menuRef2}
+                  className={`relative flex items-center overflow-auto justify-evenly `}
                 >
-                  {item.name}
-                </div>
-              ))}
-              <div className="border-[1px] ml-1 h-8 dark:border-[rgba(255,255,255,0.1)]  border-[rgba(1,1,1,0.1)] antialiased"></div>
-              <AnimatePresence>
-                {darkMode ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.1 }}
-                  >
-                    <IoIosSunny
+                  {menuItems.map((item) => (
+                    <div
+                      key={item.id}
+                      id={item.name}
+                      className="relative cursor-pointer px-[13px] py-2 z-20 select-none"
                       onClick={() => {
-                        if (!darkMode) {
-                          setDarkMode(true);
-                        } else {
-                          setDarkMode(false);
-                        }
+                        handleClick(item);
                       }}
-                      className="mx-3 text-2xl cursor-pointer hover:text-[rgba(255,189,0)] transition-all antialiased"
-                    />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.1 }}
-                  >
-                    <GoMoon
-                      onClick={() => {
-                        if (!darkMode) {
-                          setDarkMode(true);
-                        } else {
-                          setDarkMode(false);
-                        }
-                      }}
-                      className="mx-3 text-2xl cursor-pointer hover:text-[rgba(77,0,255)] transition-all antialiased"
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    >
+                      {item.name}
+                    </div>
+                  ))}
+                  <div className="border-[1px] ml-1 h-8 dark:border-[rgba(255,255,255,0.1)]  border-[rgba(1,1,1,0.1)] antialiased"></div>
+                  <AnimatePresence>
+                    {darkMode ? (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.1 }}
+                      >
+                        <IoIosSunny
+                          onClick={() => {
+                            if (!darkMode) {
+                              setDarkMode(true);
+                            } else {
+                              setDarkMode(false);
+                            }
+                          }}
+                          className="mx-3 text-2xl cursor-pointer hover:text-[rgba(255,189,0)] transition-all antialiased"
+                        />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.1 }}
+                      >
+                        <GoMoon
+                          onClick={() => {
+                            if (!darkMode) {
+                              setDarkMode(true);
+                            } else {
+                              setDarkMode(false);
+                            }
+                          }}
+                          className="mx-3 text-2xl cursor-pointer hover:text-[rgba(77,0,255)] transition-all antialiased"
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
-              <motion.div
-                className="absolute h-10 dark:bg-gray-600  bg-light-gray-200 rounded-xl z-10"
-                style={{
-                  width: `${selectedWidth}px`,
-                  left: `${selectedLeft}px`,
-                }}
-                layoutId="underline"
-                transition={{
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 30,
-                }}
-              />
+                  <motion.div
+                    className="absolute h-10 dark:bg-gray-600  bg-light-gray-200 rounded-xl z-10"
+                    style={{
+                      width: `${selectedWidth}px`,
+                      left: `${selectedLeft}px`,
+                    }}
+                    layoutId="underline"
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 30,
+                    }}
+                  />
+                </motion.div>
+              </div>
             </motion.div>
-          </div>
-        </motion.div>
-      </motion.div>
-    </div>
+          </motion.div>
+        </div>
+      )}
+    </>
   );
 };
 
