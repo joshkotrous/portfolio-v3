@@ -18,7 +18,7 @@ export const routes: RouteRecord[] = [
         path: "posts/:postName",
         Component: React.lazy(() => import("./pages/posts/[post]")),
         entry: "src/pages/posts/[post].tsx",
-        getStaticPaths: () => ["/posts/leading-effective-1-1s"],
+        getStaticPaths: () => ["/posts/Leading Effective 1-1s"],
       },
     ],
     entry: "src/Layout.tsx",
