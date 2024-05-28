@@ -1701,6 +1701,11 @@ video {
   font-size: 10px;
 }
 
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -2101,6 +2106,46 @@ video {
 
   .md\:text-5xl {
     font-size: 3rem;
+    line-height: 1;
+  }
+
+  .md\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .md\:text-8xl {
+    font-size: 6rem;
+    line-height: 1;
+  }
+
+  .md\:text-9xl {
+    font-size: 8rem;
+    line-height: 1;
+  }
+
+  .md\:text-\[200rem\] {
+    font-size: 200rem;
+  }
+
+  .md\:text-\[10rem\] {
+    font-size: 10rem;
+  }
+
+  .md\:text-\[50rem\] {
+    font-size: 50rem;
+  }
+
+  .md\:text-\[5rem\] {
+    font-size: 5rem;
+  }
+
+  .md\:text-\[1rem\] {
+    font-size: 1rem;
+  }
+
+  .md\:text-7xl {
+    font-size: 4.5rem;
     line-height: 1;
   }
 }

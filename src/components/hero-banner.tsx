@@ -17,7 +17,7 @@ const HeroBanner = () => {
     >
       <div className="flex flex-col items-center justify-center">
         <WordRotate
-          className="text-3xl md:text-4xl font-bold"
+          className="text-3xl md:text-7xl font-bold"
           words={[
             "Web Development.",
             "Engineering Leadership.",
@@ -30,7 +30,7 @@ const HeroBanner = () => {
             "Responsive Design.",
           ]}
         />
-        <div className="text-sm md:text-base">
+        <div className="text-sm md:text-lg">
           Currently Senior Software Engineering Manager @{" "}
           <Link
             to="https://americanexpress.com"
@@ -40,7 +40,7 @@ const HeroBanner = () => {
             American Express
           </Link>
         </div>
-        <div className="flex items-center gap-1 text-sm md:text-base">
+        <div className="flex items-center gap-1 text-sm md:text-lg">
           <FaLocationDot />
           New York, NY
         </div>
