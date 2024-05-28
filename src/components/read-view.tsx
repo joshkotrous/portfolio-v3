@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet";
 import { Head } from "vite-react-ssg";
 // @ts-ignore
 import { HashLink } from "react-router-hash-link";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ReadViewProps {
   filePath: string;
@@ -75,12 +76,14 @@ const ReadView: React.FC<ReadViewProps> = ({
       </Helmet> */}
       <Head>
         <title>{`Josh Kotrous | ${title}`}</title>
-
+        <meta name="author" property="og:author" content="Josh Kotrous" />
+        <meta property="og:type" content="Article" />
         <meta name="title" property="og:title" content={title} />
+        <meta name="description" property="og:description" content={summary} />
       </Head>
       <div className="w-[90vw] h-screen p-2 pt-10">
         <BorderedContainer
-          className="max-h-[95%] text-left"
+          className="min-h-[95%] text-left"
           secondaryClassName="gap-0"
         >
           <div className="w-fit h-fit">
@@ -93,46 +96,61 @@ const ReadView: React.FC<ReadViewProps> = ({
               />
             </HashLink>
           </div>
-          <ReactMarkdown
-            components={{
-              h1: ({ children }) => (
-                <>
-                  <h1 className="text-3xl font-bold">{children}</h1>
-                  <p className="font-normal">{date}</p>
-                </>
-              ),
-              h2: ({ children }) => (
-                <h2 className="text-2xl font-semibold mt-4">{children}</h2>
-              ),
-              p: ({ children }) => <p className="inter-regular">{children}</p>,
-              table: ({ children }) => (
-                <div className="text-center overflow-auto">
-                  <table className="border-collapse m-auto  border-[1px]">
-                    {children}
-                  </table>
-                </div>
-              ),
-              th: ({ children }) => (
-                <th className=" border-[1px] p-3">{children}</th>
-              ),
-              td: ({ children }) => (
-                <td className=" border-[1px] p-3">{children}</td>
-              ),
-              ol: ({ children }) => (
-                <ol className="list-decimal">{children}</ol>
-              ),
-              ul: ({ children }) => (
-                <div className="w-full max-w-[700px] flex justify-center m-auto px-10">
-                  <ul className="list-disc">{children}</ul>
-                </div>
-              ),
-              strong: ({ children }) => (
-                <strong className="font-bold">{children}</strong>
-              ),
-            }}
-            remarkPlugins={[remarkGfm]}
-            children={articleContent}
-          />
+          <AnimatePresence>
+            {articleContent && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                <ReactMarkdown
+                  components={{
+                    h1: ({ children }) => (
+                      <>
+                        <h1 className="text-3xl font-bold">{children}</h1>
+                        <p className="font-normal">{date}</p>
+                      </>
+                    ),
+                    h2: ({ children }) => (
+                      <h2 className="text-2xl font-semibold mt-4">
+                        {children}
+                      </h2>
+                    ),
+                    p: ({ children }) => (
+                      <p className="inter-regular">{children}</p>
+                    ),
+                    table: ({ children }) => (
+                      <div className="text-center overflow-auto">
+                        <table className="border-collapse m-auto  border-[1px]">
+                          {children}
+                        </table>
+                      </div>
+                    ),
+                    th: ({ children }) => (
+                      <th className=" border-[1px] p-3">{children}</th>
+                    ),
+                    td: ({ children }) => (
+                      <td className=" border-[1px] p-3">{children}</td>
+                    ),
+                    ol: ({ children }) => (
+                      <ol className="list-decimal">{children}</ol>
+                    ),
+                    ul: ({ children }) => (
+                      <div className="w-full max-w-[700px] flex justify-center m-auto px-10">
+                        <ul className="list-disc">{children}</ul>
+                      </div>
+                    ),
+                    strong: ({ children }) => (
+                      <strong className="font-bold">{children}</strong>
+                    ),
+                  }}
+                  remarkPlugins={[remarkGfm]}
+                  children={articleContent}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </BorderedContainer>
       </div>
     </>

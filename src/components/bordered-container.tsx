@@ -1,5 +1,4 @@
 import React from "react";
-
 interface BorderedContainerProps {
   children?: React.ReactNode;
   className?: string;
@@ -13,7 +12,7 @@ const BorderedContainer: React.FC<BorderedContainerProps> = ({
 }) => {
   return (
     <div
-      className={`relative w-full h-fit max-h-[90%] flex flex-col gap-4 border-black/20 dark:border-white/20 border-[1px] backdrop-blur-[50px] ${className}`}
+      className={`relative w-full  max-h-[90%] flex flex-col gap-4 border-black/20 dark:border-white/20 border-[1px] backdrop-blur-[50px] transition-all ${className}`}
     >
       <div className={`overflow-auto gap-4 p-4 ${secondaryClassName}`}>
         {children}

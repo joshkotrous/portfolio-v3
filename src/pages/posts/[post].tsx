@@ -3,6 +3,7 @@ import ReadView from "@/components/read-view";
 import { useState, useEffect } from "react";
 import { GetPosts, PostData } from "@/hooks/get-posts";
 import { FormatDate } from "@/hooks/format-date";
+import { motion } from "framer-motion";
 export default function B() {
   const { postName } = useParams();
   const [posts, setPosts] = useState<Array<PostData>>();
@@ -35,7 +36,12 @@ export default function B() {
   }, [posts]);
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+    >
       {postFilePath && postTitle && (
         <ReadView
           filePath={postFilePath}
@@ -44,7 +50,7 @@ export default function B() {
           summary={postSummary}
         ></ReadView>
       )}
-    </div>
+    </motion.div>
   );
 }
 

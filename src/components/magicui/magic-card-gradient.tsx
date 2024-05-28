@@ -11,7 +11,7 @@ export const MagicCardGradient: React.FC<MagicCardGradientProps> = ({
     <MagicContainer
       className={"flex h-full w-full gap-4 justify-center items-start "}
     >
-      <div className="grid gap-4 gap-y-20 grid-cols-1 md:grid-cols-3 w-full auto-rows-[250px] ">
+      <div className="grid gap-4 gap-y-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full auto-rows-[250px] ">
         {children}
       </div>
     </MagicContainer>

@@ -21,7 +21,7 @@ export default function Index() {
       description: "My first developer portfolio.",
       url: "https://joshkotrous.github.io/portfolio-v1",
       repoUrl: "https://github.com/joshkotrous/portfolio-v1",
-      skills: ["React", "JavaScript", "Framer Motion"],
+      skills: ["React", "JavaScript", "Framer Motion", "Python"],
     },
   ];
   const getPosts = async () => {
@@ -46,16 +46,16 @@ export default function Index() {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/react.svg" />
 
         <title>Josh Kotrous</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
+      </Head> */}
 
       <HeroBanner />
-      <Section title="Posts">
+      <Section title="Posts" className="h-[50vh]">
         <BorderedContainer secondaryClassName="flex flex-col max-h-[80vh]">
           {posts &&
             posts.map((post: PostData, index: number) => {

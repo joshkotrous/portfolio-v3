@@ -4,40 +4,48 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 const HeroBanner = () => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ amount: 0.5 }}
+      transition={{ duration: 0.35 }}
       id="home"
       className="relative w-screen px-1 h-screen flex flex-col justify-center items-center"
     >
       <div className="flex flex-col items-center justify-center">
         <WordRotate
-          className="text-4xl font-bold"
+          className="text-3xl md:text-4xl font-bold"
           words={[
             "Web Development.",
             "UI/UX Design.",
             "Cloud Computing.",
             "Web Security.",
             "Frontend Frameworks.",
-            "Backend Architectures.",
             "API Design.",
-            "Content Management Systems.",
             "SEO Strategies.",
-            "Web Performance Optimization.",
             "Responsive Design.",
-            "JavaScript Libraries.",
           ]}
         />
-        <div>
-          Currently Senior Software Engineering Manager @ American Express
+        <div className="text-sm md:text-base">
+          Currently Senior Software Engineering Manager @{" "}
+          <Link
+            to="https://americanexpress.com"
+            target="_blank"
+            className="hover:underline"
+          >
+            American Express
+          </Link>
         </div>
-        <div className="flex items-center gap-1">
-          <FaLocationDot className="text-xl" />
+        <div className="flex items-center gap-1 text-sm md:text-base">
+          <FaLocationDot />
           New York, NY
         </div>
       </div>
 
-      <div className="absolute bottom-1/4 flex gap-4 text-5xl">
+      <div className="absolute bottom-1/4 flex gap-4 text-4xl md:text-5xl">
         <Link to="mailto:joshkotrous@gmail.com">
           <IoMail className="hover:scale-110 transition-all cursor-pointer" />
         </Link>
@@ -48,7 +56,7 @@ const HeroBanner = () => {
           <FaLinkedin className="hover:scale-110 transition-all cursor-pointer" />
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
