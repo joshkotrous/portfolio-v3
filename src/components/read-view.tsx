@@ -75,9 +75,9 @@ const ReadView: React.FC<ReadViewProps> = ({
         <meta name="author" content="Josh Kotrous" />
       </Helmet> */}
 
-      <div className="w-[90vw] h-screen p-2 pt-10">
+      <div className="w-[90vw] h-screen p-2 pt-10 flex justify-center">
         <BorderedContainer
-          className="min-h-[95%] text-left"
+          className="min-h-[95%] text-left max-w-[1024px]"
           secondaryClassName="gap-0"
         >
           <div className="w-fit h-fit">
