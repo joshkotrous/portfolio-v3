@@ -25,13 +25,13 @@ const Project: React.FC<ProjectProps> = ({
       borderWidth={3}
       className="relative flex m-auto w-full h-fit flex-col justify-end overflow-hidden bg-[radial-gradient(var(--mask-size)_circle_at_var(--mouse-x)_var(--mouse-y),#ffaa40_0,#9c40ff_50%,transparent_100%)] p-4 shadow-2xl items-center gap-2 cursor-default md:pb-4"
     >
-      <div className="relative md:left-[0rem] w-full max-h-[8rem] rounded-t-[0.5rem] [mask:linear-gradient(to_bottom,rgba(0,0,0,1)_0,rgba(0,0,0,0)_100%)] ">
+      <div className="relative md:left-[0rem] w-full max-h-[8rem] rounded-t-[0.5rem] [mask:linear-gradient(to_bottom,rgba(0,0,0,1)_0,rgba(0,0,0,0)_100%)] z-40">
         <iframe
           src={url}
           className="scale-[0.25] md:scale-[0.17] w-[105rem] sm:w-[85rem] md:w-[110rem]  lg:w-[105rem]  h-[900px] origin-top-left "
         />
       </div>
-      <div className="w-full h-fit flex flex-col mt-2 ">
+      <div className="w-full h-fit flex flex-col mt-2 relative z-50">
         <p className=" top-1/2 h-fit z-10 whitespace-nowrap text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-200 w-full">
           {title}
         </p>
