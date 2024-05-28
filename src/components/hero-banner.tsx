@@ -20,6 +20,7 @@ const HeroBanner = () => {
           className="text-3xl md:text-4xl font-bold"
           words={[
             "Web Development.",
+            "Engineering Leadership.",
             "UI/UX Design.",
             "Cloud Computing.",
             "Web Security.",

@@ -28,7 +28,7 @@ export default function Index() {
       description: "My second developer portfolio.",
       url: "https://joshkotrous.github.io/portfolio-v2",
       repoUrl: "https://github.com/joshkotrous/portfolio-v2",
-      skills: ["React", "TypeScript", "Framer Motion"],
+      skills: ["React", "TypeScript", "Framer Motion", "Tailwind CSS"],
     },
   ];
   const getPosts = async () => {
