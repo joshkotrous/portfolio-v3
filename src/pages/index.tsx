@@ -113,6 +113,7 @@ export default function Index() {
               mode.
             </p>
             <SkillTags
+              className="flex-wrap"
               skills={["React", "TypeScript", "Tailwind CSS", "Framer Motion"]}
             />
           </div>
