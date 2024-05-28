@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { GetPosts, PostData } from "@/hooks/get-posts";
 import { FormatDate } from "@/hooks/format-date";
 import { motion } from "framer-motion";
+import { Head } from "vite-react-ssg";
 export default function B() {
   const { postName } = useParams();
   const [posts, setPosts] = useState<Array<PostData>>();
@@ -36,21 +37,34 @@ export default function B() {
   }, [posts]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-    >
-      {postFilePath && postTitle && (
-        <ReadView
-          filePath={postFilePath}
-          title={postTitle}
-          date={FormatDate(postDate!)}
-          summary={postSummary}
-        ></ReadView>
-      )}
-    </motion.div>
+    <>
+      <Head>
+        <title>{`Josh Kotrous | ${postTitle}`}</title>
+        <meta name="author" property="og:author" content="Josh Kotrous" />
+        <meta property="og:type" content="Article" />
+        <meta name="title" property="og:title" content={postTitle} />
+        <meta
+          name="description"
+          property="og:description"
+          content={postSummary}
+        />
+      </Head>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+      >
+        {postFilePath && postTitle && (
+          <ReadView
+            filePath={postFilePath}
+            title={postTitle}
+            date={FormatDate(postDate!)}
+            summary={postSummary}
+          ></ReadView>
+        )}
+      </motion.div>
+    </>
   );
 }
 

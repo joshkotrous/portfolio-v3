@@ -74,13 +74,7 @@ const ReadView: React.FC<ReadViewProps> = ({
         <meta property="og:locale" content="en_US" />
         <meta name="author" content="Josh Kotrous" />
       </Helmet> */}
-      <Head>
-        <title>{`Josh Kotrous | ${title}`}</title>
-        <meta name="author" property="og:author" content="Josh Kotrous" />
-        <meta property="og:type" content="Article" />
-        <meta name="title" property="og:title" content={title} />
-        <meta name="description" property="og:description" content={summary} />
-      </Head>
+
       <div className="w-[90vw] h-screen p-2 pt-10">
         <BorderedContainer
           className="min-h-[95%] text-left"
