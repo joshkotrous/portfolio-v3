@@ -1,8 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@font-face {
-  font-family: "GeistMonoVF";
-  src: url("../public/fonts/GeistMonoVF.ttf"), format("ttf");
-}
