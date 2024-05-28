@@ -28,7 +28,7 @@ const Project: React.FC<ProjectProps> = ({
       <div className="relative md:left-[0rem] w-full max-h-[8rem] rounded-t-[0.5rem] [mask:linear-gradient(to_bottom,rgba(0,0,0,1)_0,rgba(0,0,0,0)_100%)] ">
         <iframe
           src={url}
-          className="scale-[0.3] md:scale-[0.17] w-[100rem]  lg:w-[105rem]  h-[900px] origin-top-left "
+          className="scale-[0.25] md:scale-[0.17] w-[105rem] sm:w-[85rem] md:w-[110rem]  lg:w-[105rem]  h-[900px] origin-top-left "
         />
       </div>
       <div className="w-full h-fit flex flex-col mt-2 ">
