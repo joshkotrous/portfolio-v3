@@ -34,14 +34,11 @@ export default function B() {
 
   const fetchMarkdownFile = async () => {
     try {
-      const response = await fetch(
-        "/posts/" + postName?.toLowerCase() + ".md",
-        {
-          headers: {
-            Accept: "text/markdown",
-          },
-        }
-      );
+      const response = await fetch("/posts/" + postName + ".md", {
+        headers: {
+          Accept: "text/markdown",
+        },
+      });
 
       const text = await response.text();
       if (text.includes("!DOCTYPE")) {
