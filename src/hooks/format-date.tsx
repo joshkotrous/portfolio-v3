@@ -7,5 +7,7 @@ export function FormatDate(date: string) {
   });
 
   // Format the date
-  return formatter.format(Date.parse(date));
+  if (date) {
+    return formatter.format(Date.parse(date));
+  }
 }

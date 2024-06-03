@@ -17,6 +17,7 @@ interface ReadViewProps {
   date?: string;
   summary?: string;
   title: string;
+  articleContent?: string;
 }
 
 const ReadView: React.FC<ReadViewProps> = ({
@@ -24,31 +25,16 @@ const ReadView: React.FC<ReadViewProps> = ({
   date,
   summary,
   title,
+  articleContent,
 }) => {
-  const [articleContent, setArticleContent] = useState("");
   const navigate = useNavigate();
 
   const encodedTitle = encodeURIComponent(title);
-  const fetchMarkdownFile = async () => {
-    console.log(filePath);
-    try {
-      const response = await fetch(filePath, {
-        headers: {
-          Accept: "text/markdown",
-        },
-      }); // Replace with the path to your Markdown file
-      const text = await response.text();
-      setArticleContent(text);
-    } catch (error) {
-      console.error("Error fetching Markdown file:", error);
-    }
-  };
 
   useEffect(() => {
     // const main = document.getElementById("main");
     // if (localStorage.getItem("darkMode") === "true") {
     //   console.log(localStorage.getItem("darkMode"));
-
     //   main?.classList.add("dark");
     //   main?.classList.add("bg-transparent");
     //   main?.classList.add("text-white");
@@ -56,7 +42,7 @@ const ReadView: React.FC<ReadViewProps> = ({
     //   main?.classList.remove("dark");
     //   main?.classList.remove("text-white");
     // }
-    fetchMarkdownFile();
+    // fetchMarkdownFile();
   }, []);
   return (
     <>
@@ -78,7 +64,7 @@ const ReadView: React.FC<ReadViewProps> = ({
       <div className="w-[90vw] h-screen p-2 pt-10 flex justify-center">
         <BorderedContainer
           className="min-h-[95%] text-left max-w-[1024px]"
-          secondaryClassName="gap-0"
+          secondaryClassName="gap-0 min-h-[90%]"
         >
           <div className="w-fit h-fit">
             <HashLink to="/#posts">
@@ -91,7 +77,7 @@ const ReadView: React.FC<ReadViewProps> = ({
             </HashLink>
           </div>
           <AnimatePresence>
-            {articleContent && (
+            {articleContent ? (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -143,6 +129,10 @@ const ReadView: React.FC<ReadViewProps> = ({
                   children={articleContent}
                 />
               </motion.div>
+            ) : (
+              <div className="h-full w-full flex justify-center items-center font-bold text-2xl">
+                Post not found
+              </div>
             )}
           </AnimatePresence>
         </BorderedContainer>

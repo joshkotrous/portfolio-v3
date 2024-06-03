@@ -11,6 +11,7 @@ export default function B() {
   const [postTitle, setPostTitle] = useState<string>();
   const [postDate, setPostDate] = useState<string>();
   const [postSummary, setPostSummary] = useState<string>();
+  const [articleContent, setArticleContent] = useState<string>();
 
   const [postFilePath, setPostFilePath] = useState<string>();
 
@@ -20,7 +21,9 @@ export default function B() {
   };
 
   const getPostInformation = async () => {
-    const post = posts?.find((post) => post.filepath.includes(postName!));
+    const post = posts?.find((post) =>
+      post.filepath.toLowerCase().includes(postName?.toLowerCase()!)
+    );
     console.log(post?.filepath);
     setPostTitle(post?.title);
     setPostDate(post?.date);
@@ -29,8 +32,29 @@ export default function B() {
     return post;
   };
 
+  const fetchMarkdownFile = async () => {
+    try {
+      const response = await fetch("/posts/" + postName + ".md", {
+        headers: {
+          Accept: "text/markdown",
+        },
+      });
+
+      const text = await response.text();
+      if (text.includes("!DOCTYPE")) {
+        setArticleContent("");
+      } else {
+        setArticleContent(text);
+      }
+      // setArticleContent(text);
+    } catch (error) {
+      console.error("Error fetching Markdown file:", error);
+    }
+  };
+
   useEffect(() => {
     getPosts();
+    fetchMarkdownFile();
   }, []);
 
   useEffect(() => {
@@ -56,14 +80,13 @@ export default function B() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
       >
-        {postFilePath && postTitle && (
-          <ReadView
-            filePath={postFilePath}
-            title={postTitle}
-            date={FormatDate(postDate!)}
-            summary={postSummary}
-          ></ReadView>
-        )}
+        <ReadView
+          // filePath={postName!}
+          title={postTitle!}
+          date={FormatDate(postDate!)}
+          // summary={postSummary}
+          articleContent={articleContent}
+        ></ReadView>
       </motion.div>
     </>
   );
