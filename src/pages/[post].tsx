@@ -5,6 +5,8 @@ import { GetPosts, PostData } from "@/hooks/get-posts";
 import { FormatDate } from "@/hooks/format-date";
 import { motion } from "framer-motion";
 import { Head } from "vite-react-ssg";
+import type { Params } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 export default function B() {
   const { postName } = useParams();
   const [posts, setPosts] = useState<Array<PostData>>();
@@ -14,6 +16,7 @@ export default function B() {
   const [articleContent, setArticleContent] = useState<string>();
 
   const [postFilePath, setPostFilePath] = useState<string>();
+  const doc = (useLoaderData() as string).default;
 
   const getPosts = async () => {
     const posts = await GetPosts();
@@ -81,11 +84,9 @@ export default function B() {
         transition={{ duration: 0.25 }}
       >
         <ReadView
-          // filePath={postName!}
           title={postTitle!}
           date={FormatDate(postDate!)}
-          // summary={postSummary}
-          articleContent={articleContent}
+          articleContent={doc}
         ></ReadView>
       </motion.div>
     </>
@@ -93,3 +94,20 @@ export default function B() {
 }
 
 export const Component = B;
+
+export const entry = "src/pages/posts/[post].tsx";
+
+export async function loader({ params }: { params: Params<string> }) {
+  const doc = import(`../posts/${params.postName}.md?raw`);
+  // const { renderToString } = await import("react-dom/server");
+  // const html = renderToString(<doc.default />);
+  // console.log(html);
+  return doc;
+}
+
+export function getStaticPaths() {
+  const docs = import.meta.glob("../posts/*.md");
+  return Object.keys(docs).map(
+    (path) => path.match(/\.(\/posts\/.*)\.md$/)?.[1] ?? ""
+  );
+}

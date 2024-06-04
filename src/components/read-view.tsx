@@ -13,20 +13,12 @@ import { HashLink } from "react-router-hash-link";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ReadViewProps {
-  filePath: string;
   date?: string;
-  summary?: string;
   title: string;
   articleContent?: string;
 }
 
-const ReadView: React.FC<ReadViewProps> = ({
-  filePath,
-  date,
-  summary,
-  title,
-  articleContent,
-}) => {
+const ReadView: React.FC<ReadViewProps> = ({ date, title, articleContent }) => {
   const navigate = useNavigate();
 
   const encodedTitle = encodeURIComponent(title);
