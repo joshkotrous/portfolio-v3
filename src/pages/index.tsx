@@ -41,7 +41,7 @@ export default function Index() {
       img: "/portfolio-v3.png",
     },
     {
-      title: "Devumé",
+      title: "Devumé (pre-alpha)",
       description: "Showcase your skills, put your best foot forward.",
       url: "https://devume-frontend.vercel.app/",
       repoUrl: "https://github.com/joshkotrous/devume-backend",
