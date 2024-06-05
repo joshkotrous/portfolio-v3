@@ -25,10 +25,30 @@ export default function Index() {
     },
     {
       title: "Portfolio v2",
-      description: "My second developer portfolio.",
+      description: "The second iteration of my portfolio.",
       url: "https://joshkotrous.github.io/portfolio-v2",
       repoUrl: "https://github.com/joshkotrous/portfolio-v2",
       skills: ["React", "TypeScript", "Framer Motion", "Tailwind CSS"],
+    },
+    {
+      title: "Portfolio v3",
+      description: "The third iteration of my portfolio.",
+      url: "https://joshkotrous.io",
+      repoUrl: "https://github.com/joshkotrous/portfolio-v3",
+      skills: ["React", "TypeScript", "Framer Motion", "Tailwind CSS"],
+    },
+    {
+      title: "Devumé",
+      description: "Showcase your skills, put your best food forward.",
+      url: "https://devume-frontend.vercel.app/",
+      repoUrl: "https://github.com/joshkotrous/devume-backend",
+      skills: [
+        "Python",
+        "TypeScript",
+        "React",
+        "Framer Motion",
+        "Tailwind CSS",
+      ],
     },
   ];
   const getPosts = async () => {
