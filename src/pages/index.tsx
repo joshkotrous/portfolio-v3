@@ -39,7 +39,7 @@ export default function Index() {
     },
     {
       title: "Devumé",
-      description: "Showcase your skills, put your best food forward.",
+      description: "Showcase your skills, put your best foot forward.",
       url: "https://devume-frontend.vercel.app/",
       repoUrl: "https://github.com/joshkotrous/devume-backend",
       skills: [
