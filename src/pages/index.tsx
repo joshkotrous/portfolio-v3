@@ -22,6 +22,7 @@ export default function Index() {
       url: "https://joshkotrous.github.io/portfolio-v1",
       repoUrl: "https://github.com/joshkotrous/portfolio-v1",
       skills: ["React", "JavaScript", "Framer Motion", "Python"],
+      img: "/portfolio-v1.png",
     },
     {
       title: "Portfolio v2",
@@ -29,6 +30,7 @@ export default function Index() {
       url: "https://joshkotrous.github.io/portfolio-v2",
       repoUrl: "https://github.com/joshkotrous/portfolio-v2",
       skills: ["React", "TypeScript", "Framer Motion", "Tailwind CSS"],
+      img: "/portfolio-v2.png",
     },
     {
       title: "Portfolio v3",
@@ -36,6 +38,7 @@ export default function Index() {
       url: "https://joshkotrous.io",
       repoUrl: "https://github.com/joshkotrous/portfolio-v3",
       skills: ["React", "TypeScript", "Framer Motion", "Tailwind CSS"],
+      img: "/portfolio-v3.png",
     },
     {
       title: "Devumé",
@@ -49,6 +52,7 @@ export default function Index() {
         "Framer Motion",
         "Tailwind CSS",
       ],
+      img: "/devume.png",
     },
   ];
   const getPosts = async () => {
@@ -120,6 +124,7 @@ export default function Index() {
                 skills={item.skills}
                 url={item.url}
                 repoUrl={item.repoUrl}
+                img={item.img}
               ></Project>
             ))}
         </MagicCardGradient>

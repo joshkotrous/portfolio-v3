@@ -12,7 +12,7 @@ const Section: React.FC<SectionProps> = ({ title, children, className }) => {
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ amount: 0.5 }}
+      viewport={{ amount: 0.1 }}
       transition={{ duration: 0.35 }}
       id={title.toLowerCase()}
       className={`w-full h-fit text-left font-bold flex flex-col gap-6 p-4 pt-20 min-h-screen ${className}`}
